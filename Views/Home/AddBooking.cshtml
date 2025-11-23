@@ -1,0 +1,159 @@
+﻿@model WebApplication1.Models.DataViewModel
+
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center">
+    <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
+        <div class="row">
+            <div class="col-lg-8">
+                <h1>Welcome to <span>Restaurantly</span></h1>
+                <h2>Delivering great food for more than 18 years!</h2>
+                <div class="btns">
+                    <a href="#specials" class="btn-menu animated fadeInUp scrollto">Our Menu</a>
+                    <a href="#book-a-table" class="btn-book animated fadeInUp scrollto">Book a Caterer</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- End Hero -->
+
+<main id="main">         
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+        <div class="container" data-aos="fade-up">
+            @foreach (var caterer in Model.Caterers)
+            {
+                <div class="row">
+                    <div class="col-lg-6 order-1 order-lg-2" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="about-img">
+                            <img src="~/UploadImage/@caterer.CatererImage" alt="@caterer.Name">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
+                        <h3>@caterer.Name</h3>
+                        <ul>
+                            <li><i class="bi bi-check-circle"></i> Expertly crafted dishes using the finest, locally sourced ingredients.</li>
+                            <li><i class="bi bi-check-circle"></i> Customized menus tailored to suit your event's unique needs and preferences.</li>
+                            <li><i class="bi bi-check-circle"></i> Exceptional service with attention to detail, ensuring a seamless and memorable dining experience for all guests.</li>
+                        </ul>
+                        <p>@caterer.Description</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </section><!-- End About Section -->
+
+    <!-- ======= Specials Section ======= -->
+    <section id="specials" class="specials">
+        <div class="container" data-aos="fade-up">
+            <div class="section-title">
+                <h2>Specials</h2>
+                <p>Check Our Specials</p>
+            </div>
+
+            <div class="row" data-aos="fade-up" data-aos-delay="100">
+                <div class="col-lg-3">
+                    <ul class="nav nav-tabs flex-column">
+                        @foreach (var menu in Model.Menus)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link @(menu.Id == Model.Menus.First().Id ? "active" : "")"
+                                   data-bs-toggle="tab"
+                                   data-bs-target="#tab-@menu.Id">
+                                    @menu.MenuTitle
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <div class="col-lg-9 mt-4 mt-lg-0">
+                    <div class="tab-content">
+                        @foreach (var menuDescription in Model.Menus)
+                        {
+                            <div class="tab-pane fade @(menuDescription.Id == Model.Menus.First().Id ? "active show" : "")"
+                                 id="tab-@menuDescription.Id">
+                                <div class="row">
+                                    <div class="col-lg-8 details order-2 order-lg-1">
+                                        <h3>@menuDescription.MenuTitle</h3>
+                                        <p class="fst-italic">@menuDescription.MenuDescription</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <p class="mb-0 nav-link fw-bold text-nowrap">
+                                                <i class="bi bi-people-fill"></i> <strong>Number of People:</strong>
+                                                <span>@menuDescription.NumberOfPeople</span>
+                                            </p>
+                                            <p class="mb-0 nav-link fw-bold text-nowrap">
+                                                <i class="bi bi-cash-coin"></i> <strong>Price:</strong>
+                                                <span>$@menuDescription.Price</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 text-center order-1 order-lg-2">
+                                        <img src="~/UploadImage/@menuDescription.MenuImage"
+                                             alt="@menuDescription.MenuTitle" class="img-fluid" height="200px" width="200px">
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!-- End Specials Section -->
+
+<!-- ======= Book A Table Section ======= -->
+<section id="book-a-table" class="book-a-table">
+    <div class="container" data-aos="fade-up">
+        <div class="section-title">
+            <h2>Reservation</h2>
+            <p>Book a Table</p>
+        </div>
+
+        <form asp-action="AddBooking" asp-controller="Home" method="post" class="php-email-form" data-aos="fade-up">
+            <input type="hidden" asp-for="Booking.CatererId" value="@(Model.Booking?.CatererId ?? 0)" />
+            <input type="hidden" asp-for="Booking.CategoryId" value="@(Model.Booking?.CategoryId ?? 0)" />
+
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <input asp-for="Booking.CustomerName" type="text" class="form-control" placeholder="Your Name" required />
+                    <span asp-validation-for="Booking.CustomerName" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 form-group">
+                    <input asp-for="Booking.CustomerEmail" type="email" class="form-control" placeholder="Your Email" required />
+                    <span asp-validation-for="Booking.CustomerEmail" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 form-group">
+                    <input asp-for="Booking.CustomerPhone" type="text" class="form-control" placeholder="Your Phone" required />
+                    <span asp-validation-for="Booking.CustomerPhone" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 form-group">
+                    <input asp-for="Booking.ReservationDate" type="datetime-local" class="form-control" required />
+                    <span asp-validation-for="Booking.ReservationDate" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 form-group">
+                    <input asp-for="Booking.Address" type="text" class="form-control" placeholder="Address" required />
+                    <span asp-validation-for="Booking.Address" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 form-group">
+                    <select asp-for="Booking.MenuId" class="form-control" required>
+                        <option value="">Select a Menu</option>
+                        @foreach (var menu in Model.Menus)
+                        {
+                            <option value="@menu.Id">@menu.MenuTitle - $@menu.Price</option>
+                        }
+                    </select>
+                    <span asp-validation-for="Booking.MenuId" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group mt-3">
+                <textarea asp-for="Booking.Notes" class="form-control" rows="5" placeholder="Special Requests"></textarea>
+                <span asp-validation-for="Booking.Notes" class="text-danger"></span>
+            </div>
+
+            <div class="text-center mt-3">
+                <button type="submit" class="btn btn-primary">Book Now</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+</main><!-- End #main -->

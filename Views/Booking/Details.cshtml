@@ -1,0 +1,97 @@
+﻿@model WebApplication1.Models.Booking
+
+@{
+    Layout = "CatererLayout";
+}
+
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center">
+    <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
+        <div class="row">
+            <div class="col-lg-8">
+                <h1>Welcome to <span>Restaurantly</span></h1>
+                <h2>Delivering great food for more than 18 years!</h2>
+
+                <div class="btns">
+                    <a href="#about" class="btn-menu animated fadeInUp scrollto">View Booking Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- End Hero -->
+
+
+
+
+
+
+
+<main id="main">
+    <!-- ======= Booking Details Section ======= -->
+    <section id="about" class="about">
+        <div class="container" data-aos="fade-up">
+            <div class="section-title">
+                <h2>Booking Details</h2>
+                <p>Customer and Booking Information</p>
+            </div>
+
+            <div class="row content">
+                <div class="col-lg-6">
+                    <h3 class="text-gold">Customer Information</h3>
+                    <ul class="details-list">
+                        <li><strong>ID:</strong> @Model.User.Id</li>
+                        <li><strong>Name:</strong> @Model.CustomerName</li>
+                        <li><strong>Email:</strong> @Model.CustomerEmail</li>
+                        <li><strong>Phone:</strong> @Model.CustomerPhone</li>
+                        <li><strong>Address:</strong> @Model.Address</li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-6 pt-4 pt-lg-0">
+                    <h3 class="text-gold">Booking Details</h3>
+                    <ul class="details-list">
+                        <li><strong>Booking ID:</strong> @Model.Id</li>
+                        <li><strong>Reservation Date:</strong> @Model.ReservationDate.ToString("g")</li>
+                        <li>
+                            <strong>Status:</strong>
+                            <span class="badge status-@Model.Status.ToLower()">
+                                @Model.Status
+                            </span>
+                        </li>
+                        <li><strong>Notes:</strong> @Model.Notes</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row content mt-4">
+                <div class="col-lg-6">
+                    <h3 class="text-gold">Caterer Information</h3>
+                    <ul class="details-list">
+                        <li><strong>Caterer ID:</strong> @Model.Caterer.Id</li>
+                        <li><strong>Name:</strong> @Model.Caterer.Name</li>
+                        <li><strong>Category:</strong> @Model.Category.Name</li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-6 pt-4 pt-lg-0">
+                    <h3 class="text-gold">Menu Details</h3>
+                    <ul class="details-list">
+                        <li><strong>Title:</strong> @Model.Menu.MenuTitle</li>
+                        <li><strong>Description:</strong> @Model.Menu.MenuDescription</li>
+                        <li><strong>Serves:</strong> @Model.Menu.NumberOfPeople People</li>
+                        <li><strong>Price:</strong> <span class="price">@Model.Menu.Price.ToString("C")</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <form asp-action="Approve" method="post" class="d-inline">
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <button type="submit" class="btn btn-gold me-3">
+                        <i class="bi bi-check-circle"></i> Approve
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>

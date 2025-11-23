@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="wwwroot\Migrations\20250223104244_tables.cs" />
+    <Compile Include="wwwroot\Migrations\20250223104244_tables.Designer.cs" />
+    <Compile Include="wwwroot\Migrations\20250223152213_bookings.cs" />
+    <Compile Include="wwwroot\Migrations\20250223152213_bookings.Designer.cs" />
+    <Compile Include="wwwroot\Migrations\20250225130425_updatecategory.cs" />
+    <Compile Include="wwwroot\Migrations\20250225130425_updatecategory.Designer.cs" />
+    <Compile Include="wwwroot\Migrations\20250227101651_message.cs" />
+    <Compile Include="wwwroot\Migrations\20250227101651_message.Designer.cs" />
+    <Compile Include="wwwroot\Migrations\20250227155423_add date&amp;time.cs" />
+    <Compile Include="wwwroot\Migrations\20250227155423_add date&amp;time.Designer.cs" />
+    <Compile Include="wwwroot\Migrations\20250228170253_message update.cs" />
+    <Compile Include="wwwroot\Migrations\20250228170253_message update.Designer.cs" />
+    <Compile Include="wwwroot\Migrations\ApplicationDbContextModelSnapshot.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\UploadImage\" />
+  </ItemGroup>
+
+</Project>

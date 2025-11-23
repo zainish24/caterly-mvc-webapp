@@ -1,0 +1,126 @@
+﻿@model WebApplication1.Models.Caterer
+<link href="~/css/stylesheet.css" rel="stylesheet" />
+
+@{
+    Layout = "CatererLayout";
+}
+
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center">
+    <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
+        <div class="row">
+            <div class="col-lg-8">
+                <h1>Welcome to <span>Restaurantly</span></h1>
+                <h2>Delivering great food for more than 18 years!</h2>
+
+                <div class="btns">
+                    <a href="#contact" class="btn-menu animated fadeInUp scrollto">Login & Continue</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- End Hero -->
+
+
+
+
+<!-- ======= Contact Section ======= -->
+<main id="main">
+<section id="contact" class="contact">
+    <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+            <h2>Login</h2>
+            <p>Login us</p>
+        </div>
+    </div>
+
+    <div data-aos="fade-up">
+        <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <div class="container" data-aos="fade-up">
+
+        <div class="row mt-5">
+
+            <div class="col-lg-4">
+                <div class="info">
+                    <div class="address">
+                        <i class="bi bi-geo-alt"></i>
+                        <h4>Location:</h4>
+                        <p>A108 Adam Street, New York, NY 535022</p>
+                    </div>
+
+                    <div class="open-hours">
+                        <i class="bi bi-clock"></i>
+                        <h4>Open Hours:</h4>
+                        <p>
+                            Monday-Saturday:<br>
+                            11:00 AM - 2300 PM
+                        </p>
+                    </div>
+
+                    <div class="email">
+                        <i class="bi bi-envelope"></i>
+                        <h4>Email:</h4>
+                        <p>info@example.com</p>
+                    </div>
+
+                    <div class="phone">
+                        <i class="bi bi-phone"></i>
+                        <h4>Call:</h4>
+                        <p>+1 5589 55488 55s</p>
+                    </div>
+
+                        <div class="phone">
+                            <i class="bi bi-box-arrow-in-right"></i>
+                            <h4>User: </h4>
+                            <p><a asp-action="Login" asp-controller="Home">Login as User</a></p>
+                        </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-8 mt-5 mt-lg-0">
+
+                <!-- Attractive Header Text -->
+                <div class="section-title text-center">
+                    <h2>Welcome Back!</h2>
+                    <p>Log in to manage your catering services and connect with customers.</p>
+                </div>
+
+
+                <form asp-action="CatererLogin" asp-controller="Caterer" method="post" role="form" class="php-email-form">
+                    <div class="row">
+
+                        <!-- Email Field -->
+                        <div class="form-group mt-3">
+                            <label for="email">Email</label>
+                            <input asp-for="Email" class="form-control" type="email" placeholder="Your Email" required>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <!-- Password Field -->
+                        <div class="form-group mt-3">
+                            <label for="id">Caterer ID</label>
+                            <input asp-for="Id" class="form-control"  type="password" placeholder="Your Caterer ID" required>
+                            <span asp-validation-for="Id" class="text-danger"></span>
+                        </div>
+
+
+                    </div>
+
+                    <div class="text-center mt-3">
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </div>
+
+                </form>
+            </div>
+
+
+        </div>
+
+    </div>
+</section><!-- End Contact Section -->
+</main>

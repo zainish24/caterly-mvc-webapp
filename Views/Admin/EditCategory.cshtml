@@ -1,0 +1,48 @@
+﻿@model WebApplication1.Models.CatererCategory
+
+@{
+    Layout = "AdminLayout";
+}
+
+
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center">
+    <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
+        <div class="row">
+            <div class="col-lg-8">
+                <h1>Welcome to <span>Restaurantly</span></h1>
+                <h2>Delivering great food for more than 18 years!</h2>
+
+                <div class="btns">
+                    <a href="#contact" class="btn-menu animated fadeInUp scrollto">Edit Caterer Category</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- End Hero -->
+
+
+<main id="main">
+    <section class="contact">
+        <div class="container text-gold">
+            <div class="section-title">
+                <h2>Edit Category</h2>
+            </div>
+
+            <form asp-action="EditCategory" asp-controller="Admin" method="post" class="php-email-form">
+                <input type="hidden" asp-for="Id" />
+
+                <div class="form-group">
+                    <label asp-for="Name">Category Name</label>
+                    <input asp-for="Name" class="form-control">
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="text-center mt-3">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button asp-action="Category" asp-controller="Admin" class="btn btn-secondary">Back to List</button>
+                </div>
+            </form>
+        </div>
+    </section>
+</main>

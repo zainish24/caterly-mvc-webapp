@@ -1,0 +1,147 @@
+﻿@model WebApplication1.Models.DataViewModel
+
+
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center">
+    <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
+        <div class="row">
+            <div class="col-lg-8">
+                <h1>Welcome to <span>Restaurantly</span></h1>
+                <h2>Delivering great food for more than 18 years!</h2>
+                <div class="col-lg-4 d-flex align-items-center justify-content-center position-relative" data-aos="zoom-in" data-aos-delay="200">
+                    
+                </div>
+
+                <div class="btns">
+                    <a href="#contact" class="btn-menu animated fadeInUp scrollto">Contact Us</a>
+                    <a asp-action="ViewMessages" asp-controller="Home" class="btn-book animated fadeInUp scrollto">View Messages</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Hero -->
+
+<!-- ======= Contact Section ======= -->
+<section id="contact" class="contact">
+    <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+            <h2>Contact Us</h2>
+        </div>
+    </div>
+
+    <div class="container" data-aos="fade-up">
+
+        <div class="row mt-5">
+
+            <div class="col-lg-4">
+                <div class="info">
+                    <div class="address">
+                        <i class="bi bi-geo-alt"></i>
+                        <h4>Location:</h4>
+                        <p>A108 Adam Street, New York, NY 535022</p>
+                    </div>
+
+                    <div class="open-hours">
+                        <i class="bi bi-clock"></i>
+                        <h4>Open Hours:</h4>
+                        <p>
+                            Monday-Saturday:<br>
+                            11:00 AM - 2300 PM
+                        </p>
+                    </div>
+
+                    <div class="email">
+                        <i class="bi bi-envelope"></i>
+                        <h4>Email:</h4>
+                        <p>info@example.com</p>
+                    </div>
+
+                    <div class="phone">
+                        <i class="bi bi-phone"></i>
+                        <h4>Call:</h4>
+                        <p>+1 5589 55488 55s</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-8 mt-5 mt-lg-0">
+                <form asp-action="Message" asp-controller="Home" method="post" role="form" class="php-email-form">
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <input asp-for="Message.Name" type="text" class="form-control" id="name" placeholder="Your Name" required />
+                            <span asp-validation-for="Message.Name" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 form-group mt-3 mt-md-0">
+                            <input asp-for="Message.Email" type="email" class="form-control" id="email" placeholder="Your Email" required>
+                            <span asp-validation-for="Message.Email" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 form-group mt-3 mt-md-0">
+                            <select asp-for="Message.CategoryId" class="form-control" required onchange="fetchCaterers(this.value)">
+                                <option value="">Select a Caterer Category</option>
+                                @foreach (var category in Model.CatererCategories)
+                                {
+                                    <option value="@category.Id">@category.Name</option>
+                                }
+                            </select>
+                            <span asp-validation-for="Message.CategoryId" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 form-group mt-3 mt-md-0">
+                            <select asp-for="Message.CatererId" class="form-control" id="catererbycategoryDropdown" required>
+                                <option value="">Select a Caterer</option>
+                                <!-- Caterers will be populated here based on the selected category -->
+                            </select>
+                            <span asp-validation-for="Message.CatererId" class="text-danger"></span>
+                            <span asp-validation-for="Message.CatererId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <input asp-for="Message.Subject" type="text" class="form-control" id="subject" placeholder="Subject" required>
+                        <span asp-validation-for="Message.Subject" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mt-3">
+                        <textarea asp-for="Message.Messages" class="form-control" rows="8" placeholder="Message" required></textarea>
+                        <span asp-validation-for="Message.Messages" class="text-danger"></span>
+                    </div>
+                    <div class="my-3">
+                        <div class="sent-message">Your message has been sent. Thank you!</div>
+                    </div>
+                    <div class="text-center"><button type="submit">Send Message</button></div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</section><!-- End Contact Section -->
+
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+    function fetchCaterers(categoryId) {
+        if (categoryId) {
+            $.ajax({
+                url: '@Url.Action("GetCaterersByCategory", "Home")',
+                type: "POST",
+                data: { categoryId: categoryId }, // Send the selected category ID
+                success: function (data) {
+                    var catererbycategoryDropdown = $("#catererbycategoryDropdown");
+                    catererbycategoryDropdown.empty(); // Clear previous options
+                    catererbycategoryDropdown.append('<option value="">Select a Caterer</option>'); // Add default option
+                    data.forEach(function (caterer) {
+                        catererbycategoryDropdown.append(`<option value="${caterer.eId}">${caterer.catererbycategoryName}</option>`);
+                    });
+                },
+                error: function () {
+                    console.error("Error fetching caterers.");
+                }
+            });
+        } else {
+            // If no category is selected, clear the caterer dropdown
+            $("#catererbycategoryDropdown").empty().append('<option value="">Select a Caterer</option>');
+        }
+    }
+</script>

@@ -1,0 +1,106 @@
+﻿@model WebApplication1.Models.MenuEditModel
+
+@{
+    Layout = "CatererLayout";
+}
+
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center">
+    <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
+        <div class="row">
+            <div class="col-lg-8">
+                <h1>Welcome to <span>Restaurantly</span></h1>
+                <h2>Delivering great food for more than 18 years!</h2>
+
+                <div class="btns">
+                    <a href="#contact" class="btn-menu animated fadeInUp scrollto">Edit Caterer Menus</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- End Hero -->
+
+
+
+<main id="main">
+<section class="contact">
+    <div class="container text-gold">
+        <div class="section-title">
+            <h2>Edit Menu</h2>
+            <p>Update the Menu Details</p>
+        </div>
+
+        <form asp-action="Edit" method="post" enctype="multipart/form-data" class="php-email-form">
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-group">
+                <label asp-for="MenuTitle">Menu Title</label>
+                <input asp-for="MenuTitle" class="form-control" placeholder="Enter menu title" />
+                <span asp-validation-for="MenuTitle" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="MenuDescription">Description</label>
+                <textarea asp-for="MenuDescription" class="form-control" placeholder="Enter menu description"></textarea>
+                <span asp-validation-for="MenuDescription" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="NumberOfPeople">Number of People</label>
+                <input asp-for="NumberOfPeople" type="number" class="form-control" placeholder="Enter number of people" />
+                <span asp-validation-for="NumberOfPeople" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Price">Price</label>
+                <input asp-for="Price" type="number" step="0.01" class="form-control" placeholder="Enter price" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="MenuImage">Menu Image</label>
+                <input asp-for="MenuImage" type="file" class="form-control" />
+                @if (!string.IsNullOrEmpty(ViewBag.ExistingMenuImage))
+                {
+                    <p>Current Image: <img src="@Url.Content("~/UploadImage/" + ViewBag.ExistingMenuImage)" alt="Current Menu Image" style="max-width: 200px;" /></p>
+                }
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CatererId">Caterer</label>
+                <select asp-for="CatererId" class="form-control" id="catererDropdown">
+                    <option value="">Select a caterer</option>
+                </select>
+                <span asp-validation-for="CatererId" class="text-danger"></span>
+            </div>
+
+            <div class="text-center mt-3">
+                <button type="submit" class="btn btn-primary">Update</button>
+                <a asp-action="Index" asp-controller="Menu" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</section>
+</main>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: '@Url.Action("GetCaterers", "Menu")',
+            type: "post",
+            success: function (data) {
+                var catererDropdown = $("#catererDropdown");
+                data.forEach(function (caterer) {
+                    catererDropdown.append(`<option value="${caterer.cId}" ${caterer.cId == '@Model.CatererId' ? 'selected' : ''}>${caterer.catererName}</option>`);
+                });
+            },
+            error: function () {
+                console.error("Error fetching caterers.");
+            }
+        });
+    });
+</script>

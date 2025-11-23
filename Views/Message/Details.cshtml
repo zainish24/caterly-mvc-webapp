@@ -1,0 +1,172 @@
+﻿@model WebApplication1.Models.DataViewModel
+
+<link href="~/css/adminpanel.css" rel="stylesheet" />
+
+@{
+    Layout = "CatererLayout";
+}
+
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center">
+    <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
+        <div class="row">
+            <div class="col-lg-8">
+                <h1>Welcome to <span>Restaurantly</span></h1>
+                <h2>Delivering great food for more than 18 years!</h2>
+
+                <div class="btns">
+                    <a href="#about" class="btn-menu animated fadeInUp scrollto">View Message Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- End Hero -->
+
+<main id="main">
+
+    <div class="container mt-3">
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                @TempData["Success"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                @TempData["Error"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+    </div>
+
+    <section id="about" class="about">
+        <div class="container" data-aos="fade-up">
+            <div class="section-title">
+                <h2>Message Details</h2>
+                <p>View Message Information</p>
+            </div>
+
+            <div class="row content">
+                <div class="col-lg-4">
+                    <h3 class="text-gold">Customer Information</h3>
+                    <ul class="details-list">
+                        <li><strong>User ID:</strong> @Model.Message.User.Id</li>
+                        <li><strong>Name:</strong> @Model.Message.Name</li>
+                        <li><strong>Email:</strong> @Model.Message.Email</li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4">
+                    <h3 class="text-gold">Caterer Information</h3>
+                    <ul class="details-list">
+                        <li><strong>Caterer ID:</strong> @Model.Message.Caterer.Id</li>
+                        <li><strong>Name:</strong> @Model.Message.Caterer.Name</li>
+                        <li><strong>Category:</strong> @Model.Message.Category.Name</li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4">
+                    <h3 class="text-gold">Message Information</h3>
+                    <ul class="details-list">
+                        <li><strong>Date:</strong> @Model.Message.CreatedDate</li>
+                        <li><strong>Message ID:</strong> @Model.Message.Id</li>
+                        <li><strong class="text-gold">Subject:</strong> @Model.Message.Subject</li>
+                        <li><strong class="text-gold">Message:</strong> @Model.Message.Messages</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <a class="btn btn-gold me-3" href="#reply">
+                    <i class="bi bi-check-circle"></i> Reply
+                </a>
+
+                <form asp-action="Cancel" method="post" onsubmit="return confirmDelete();" class="d-inline">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" value="@Model.Message.Id" />
+                    <button type="submit" class="btn btn-danger">
+                        <i class="bi bi-trash"></i> Delete Message
+                    </button>
+                </form>
+            </div>
+
+            <!-- ======= Reply Section ======= -->
+            <section id="reply" class="contact">
+                <div class="container" data-aos="fade-up">
+                    <div class="section-title">
+                        <h2>Reply to Customer</h2>
+                        <p>Fill out the form below</p>
+                    </div>
+
+                    <div data-aos="fade-up">
+                        <div class="row mt-5">
+                            <div class="col-lg-8 mt-5 mt-lg-0">
+                                <form asp-action="Details" asp-controller="Message" method="post" role="form" class="php-email-form">
+                                    <input type="hidden" asp-for="Message.UserId" value="@Model.Message.UserId" />
+                                    <input type="hidden" asp-for="Message.CatererId" value="@Model.Message.CatererId" />
+                                    <input type="hidden" asp-for="Message.CategoryId" value="@Model.Message.CategoryId" />
+
+                                    <div class="row">
+                                        <div class="col-md-6 form-group">
+                                            <input asp-for="Message.Name" type="text" class="form-control" placeholder="Your Name" required />
+                                            <span asp-validation-for="Message.Name" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-md-6 form-group mt-3 mt-md-0">
+                                            <input asp-for="Message.Email" type="email" class="form-control" placeholder="Your Email" required>
+                                            <span asp-validation-for="Message.Email" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mt-3">
+                                        <input asp-for="Message.Subject" type="text" class="form-control" placeholder="Subject" required>
+                                        <span asp-validation-for="Message.Subject" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group mt-3">
+                                        <textarea asp-for="Message.Messages" class="form-control" rows="8" placeholder="Message" required></textarea>
+                                        <span asp-validation-for="Message.Messages" class="text-danger"></span>
+                                    </div>
+                                    <div class="my-3">
+                                        <div class="sent-message">Your message has been sent. Thank you!</div>
+                                    </div>
+                                    <div class="text-center"><button type="submit">Send Message</button></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section><!-- End Reply Section -->
+        </div>
+    </section><!-- End Booking Details Section -->
+</main>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+    function confirmDelete() {
+        return confirm("Are you sure you want to delete this message? This action cannot be undone.");
+    }
+
+    function fetchCaterers(categoryId) {
+        if (categoryId) {
+            $.ajax({
+                url: '@Url.Action("GetCaterersByCategory", "Home")',
+                type: "POST",
+                data: { categoryId: categoryId },
+                success: function (data) {
+                    var catererbycategoryDropdown = $("#catererbycategoryDropdown");
+                    catererbycategoryDropdown.empty();
+                    catererbycategoryDropdown.append('<option value="">Select a Caterer</option>');
+                    data.forEach(function (caterer) {
+                        catererbycategoryDropdown.append(`<option value="${caterer.eId}">${caterer.catererbycategoryName}</option>`);
+                    });
+                },
+                error: function () {
+                    console.error("Error fetching caterers.");
+                }
+            });
+        } else {
+            $("#catererbycategoryDropdown").empty().append('<option value="">Select a Caterer</option>');
+        }
+    }
+</script>

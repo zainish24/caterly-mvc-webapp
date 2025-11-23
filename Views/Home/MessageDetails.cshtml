@@ -1,0 +1,69 @@
+﻿@model WebApplication1.Models.Message
+
+<link href="~/css/adminpanel.css" rel="stylesheet" />
+
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center">
+    <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
+        <div class="row">
+            <div class="col-lg-8">
+                <h1>Welcome to <span>Restaurantly</span></h1>
+                <h2>Delivering great food for more than 18 years!</h2>
+
+                <div class="btns">
+                    <a href="#about" class="btn-menu animated fadeInUp scrollto">View Message Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- End Hero -->
+
+<main id="main">
+    <section id="about" class="about">
+        <div class="container" data-aos="fade-up">
+            <div class="section-title">
+                <h2>Message Details</h2>
+            </div>
+
+            <div class="row content">
+                <div class="col-lg-4">
+                    <h3 class="text-gold">Customer Information</h3>
+                    <ul class="details-list">
+                        <li><strong>User ID:</strong> @Model.User.Id</li>
+                        <li><strong>Name:</strong> @Model.Name</li>
+                        <li><strong>Email:</strong> @Model.Email</li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4">
+                    <h3 class="text-gold">Caterer Information</h3>
+                    <ul class="details-list">
+                        <li><strong>Caterer ID:</strong> @Model.Caterer.Id</li>
+                        <li><strong>Name:</strong> @Model.Caterer.Name</li>
+                        <li><strong>Category:</strong> @Model.Category.Name</li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4">
+                    <h3 class="text-gold">Message Information</h3>
+                    <ul class="details-list">
+                        <li><strong>Date:</strong> @Model.CreatedDate.ToString("g")</li>
+                        <li><strong>Message ID:</strong> @Model.Id</li>
+                        <li><strong class="text-gold">Subject:</strong> @Model.Subject</li>
+                        <li><strong class="text-gold">Message:</strong> @Model.Messages</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <form asp-action="Message" asp-controller="Home" method="get" class="d-inline">
+                    <button type="submit" class="btn btn-gold me-3" aria-label="Reply to this message">
+                        <i class="bi bi-reply"></i> Reply
+                    </button>
+                </form>
+
+            </div>
+
+        </div>
+    </section><!-- End Message Details Section -->
+</main>

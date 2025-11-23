@@ -1,0 +1,58 @@
+﻿@model IEnumerable< WebApplication1.Models.Message>
+
+@{
+    Layout = "AdminLayout";
+}
+
+
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center">
+    <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
+        <div class="row">
+            <div class="col-lg-8">
+                <h1>Welcome to <span>Restaurantly</span></h1>
+                <h2>Delivering great food for more than 18 years!</h2>
+
+                <div class="btns">
+                    <a href="#messages" class="btn-menu animated fadeInUp scrollto">View Messages</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- End Hero -->
+
+<main id="main">
+    <section id="messages" class="messages">
+        <div class="container" data-aos="fade-up">
+            <div class="section-title">
+                <h2>Message List</h2>
+                <p>View Existing Messages</p>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-dark table-hover">
+                    <thead class="bg-gold">
+                        <tr>
+                            <th style="text-align: left;">Customer Name</th>
+                            <th style="text-align: left;">Caterer Name</th>
+                            <th style="text-align: left;">Category Name</th>
+                            <th style="text-align: left;">Date</th>
+                            <th style="text-align: left;">Sender Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var message in Model)
+                        {
+                            <tr>
+                                <td>@message.Name</td>
+                                <td>@message.Caterer.Name</td>
+                                <td>@message.Category.Name</td>
+                                <td>@message.CreatedDate.ToString("MMM dd, yyyy hh:mm tt")</td>
+                                <td class="table-name">@message.SenderType</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</main>

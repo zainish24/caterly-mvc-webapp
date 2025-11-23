@@ -1,0 +1,210 @@
+﻿@model WebApplication1.Models.DataViewModel
+
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center">
+    <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
+        <div class="row">
+            <div class="col-lg-8">
+                <h1>Welcome to <span>Restaurantly</span></h1>
+                <h2>Delivering great food for more than 18 years!</h2>
+
+                <div class="btns">
+                    <a href="#menu" class="btn-menu animated fadeInUp scrollto">Our Caterers</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- End Hero -->
+
+
+<main id="main">
+<!-- ======= About Section ======= -->
+<section id="about" class="about">
+    <div class="container" data-aos="fade-up">
+
+        <div class="row">
+            <div class="col-lg-6 order-1 order-lg-2" data-aos="zoom-in" data-aos-delay="100">
+                <div class="about-img">
+                    <img src="~/assets/img/about.jpg" alt="About Us">
+                </div>
+            </div>
+            <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
+                <h3>Seamless Catering Experience Tailored to Your Needs</h3>
+                <p class="fst-italic">
+                    Discover a premium catering platform designed to connect you with top-rated caterers who specialize in crafting
+                    exquisite menus for any occasion.
+                </p>
+                <ul>
+                    <li><i class="bi bi-check-circle"></i> Browse and book professional caterers based on your event preferences.</li>
+                    <li><i class="bi bi-check-circle"></i> Select menus that align with your taste, dietary needs, and budget.</li>
+                    <li><i class="bi bi-check-circle"></i> Enjoy seamless coordination and high-quality service at your desired location.</li>
+                </ul>
+                <p>
+                    Whether you're planning an intimate gathering, a corporate event, or a grand celebration, we make catering effortless.
+                    Choose from a variety of cuisines and expert chefs, ensuring an unforgettable dining experience for you and your guests.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</section><!-- End About Section -->
+
+
+
+<!-- ======= Why Us Section ======= -->
+<section id="why-us" class="why-us">
+    <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+            <h2>Why Choose Us</h2>
+            <p>Your Go-To Catering Solution</p>
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-4">
+                <div class="box" data-aos="zoom-in" data-aos-delay="100">
+                    <span>01</span>
+                    <h4>Tailored Catering Services</h4>
+                    <p>Find caterers that match your event type, guest count, and cuisine preferences with ease.</p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mt-4 mt-lg-0">
+                <div class="box" data-aos="zoom-in" data-aos-delay="200">
+                    <span>02</span>
+                    <h4>Verified Professionals</h4>
+                    <p>We partner with experienced and trusted caterers, ensuring top-tier service and delicious meals.</p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mt-4 mt-lg-0">
+                <div class="box" data-aos="zoom-in" data-aos-delay="300">
+                    <span>03</span>
+                    <h4>Hassle-Free Booking</h4>
+                    <p>Compare caterers, view their menus, and book instantly—all in just a few clicks.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section><!-- End Why Us Section -->
+
+
+<!-- Start Menu Section -->
+<section id="menu" class="menu section-bg">
+    <div class="container" data-aos="fade-up">
+        <div class="section-title">
+            <h2>Caterers</h2>
+            <p>Check Our Caterers</p>
+        </div>
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-lg-12 d-flex justify-content-center">
+                <ul id="menu-flters">
+                    <li data-filter="*" class="filter-active">All</li>
+                    @foreach (var category in Model.CatererCategories)
+                    {
+                        <li data-filter=".filter-@category.Id">@category.Name</li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="row menu-container" data-aos="fade-up" data-aos-delay="200">
+                @foreach (var caterer in Model.Caterers)
+                {
+                    <div class="col-lg-6 menu-item filter-@caterer.CategoryId">
+                        <img src="~/UploadImage/@caterer.CatererImage" class="menu-img" alt="@caterer.Name">
+                        <div class="menu-content">
+                            <a asp-action="AddBooking" asp-controller="Home" asp-route-id="@caterer.Id">@caterer.Name</a>
+                        </div>
+                        <div class="menu-ingredients">
+                            @caterer.Description
+                        </div>
+                    </div>
+                }
+        </div>
+    </div>
+</section>
+<!-- End Menu Section -->
+    <!-- ======= Gallery Section ======= -->
+    <section id="gallery" class="gallery">
+        <div class="container" data-aos="fade-up">
+            <div class="section-title">
+                <h2>Gallery</h2>
+                <p>Some photos from our catering events</p>
+            </div>
+        </div>
+        <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
+
+            <div class="row g-0">
+
+                <div class="col-lg-3 col-md-4">
+                    <div class="gallery-item">
+                        <a href="assets/img/gallery/gallery-1.jpg" class="gallery-lightbox" data-gall="gallery-item">
+                            <img src="~/assets/img/gallery/gallery-1.jpg" alt="" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4">
+                    <div class="gallery-item">
+                        <a href="assets/img/gallery/gallery-2.jpg" class="gallery-lightbox" data-gall="gallery-item">
+                            <img src="~/assets/img/gallery/gallery-2.jpg" alt="" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4">
+                    <div class="gallery-item">
+                        <a href="assets/img/gallery/gallery-3.jpg" class="gallery-lightbox" data-gall="gallery-item">
+                            <img src="~/assets/img/gallery/gallery-3.jpg" alt="" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4">
+                    <div class="gallery-item">
+                        <a href="assets/img/gallery/gallery-4.jpg" class="gallery-lightbox" data-gall="gallery-item">
+                            <img src="~/assets/img/gallery/gallery-4.jpg" alt="" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4">
+                    <div class="gallery-item">
+                        <a href="assets/img/gallery/gallery-5.jpg" class="gallery-lightbox" data-gall="gallery-item">
+                            <img src="~/assets/img/gallery/gallery-5.jpg" alt="" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4">
+                    <div class="gallery-item">
+                        <a href="assets/img/gallery/gallery-6.jpg" class="gallery-lightbox" data-gall="gallery-item">
+                            <img src="~/assets/img/gallery/gallery-6.jpg" alt="" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4">
+                    <div class="gallery-item">
+                        <a href="assets/img/gallery/gallery-7.jpg" class="gallery-lightbox" data-gall="gallery-item">
+                            <img src="~/assets/img/gallery/gallery-7.jpg" alt="" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4">
+                    <div class="gallery-item">
+                        <a href="assets/img/gallery/gallery-8.jpg" class="gallery-lightbox" data-gall="gallery-item">
+                            <img src="~/assets/img/gallery/gallery-8.jpg" alt="" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section><!-- End Gallery Section -->
+</main>

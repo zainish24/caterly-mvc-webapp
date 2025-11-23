@@ -1,0 +1,179 @@
+﻿.bg-gold {
+    background-color: #cda45e !important;
+}
+
+.table {
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+    .table th {
+        background-color: #cda45e;
+        color: #000;
+        text-align: center;
+    }
+
+    .table td {
+        vertical-align: middle;
+    }
+
+.table-hover tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.btn-outline-gold {
+    border-color: #cda45e;
+    color: #cda45e;
+}
+
+    .btn-outline-gold:hover {
+        background-color: #cda45e;
+        color: #fff;
+    }
+
+.btn-outline-danger {
+    border-color: #dc3545;
+    color: #dc3545;
+}
+
+    .btn-outline-danger:hover {
+        background-color: #dc3545;
+        color: #fff;
+    }
+
+.status-approved {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.status-pending {
+    background-color: #cda45e;
+    color: #000;
+}
+
+.status-canceled {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+body {
+    margin-top: 100px;
+}
+
+/* Custom CSS to match theme */
+.text-gold {
+    color: #cda45e;
+    font-family: "Playfair Display", serif;
+}
+
+.details-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+    .details-list li {
+        padding: 8px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.9em;
+}
+
+.bg-pending {
+    background: #cda45e;
+    color: #000;
+}
+
+.bg-canceled {
+    background: #dc3545;
+    color: #fff;
+    transition: all 0.3s;
+}
+
+.btn-canceled:hover {
+    background: transparent;
+    color: #cda45e;
+}
+
+.price {
+    color: #cda45e;
+    font-weight: 600;
+}
+
+.btn-gold {
+    background: #cda45e;
+    color: #fff;
+    transition: all 0.3s;
+}
+
+    .btn-gold:hover {
+        background: transparent;
+        color: #cda45e;
+    }
+
+.table-name {
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #cda45e;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-control-plaintext {
+    padding: 10px;
+    border: 1px solid #cda45e;
+    border-radius: 5px;
+    background-color: #ccc;
+    color: #000;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+    .btn-danger:hover {
+        background-color: #c82333;
+    }
+
+.btn-secondary {
+    border: 1px solid #ccc;
+    color: #000;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+    .btn-secondary:hover {
+        background-color: #f8f9fa;
+        color: #000;
+    }
+
+img {
+    margin-top: 10px;
+}
+
+.text-right {
+    text-align: left;
+}
+
+.badge.status-approved {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.badge.status-pending {
+    background-color: #cda45e;
+    color: #000;
+}
+
+.badge.status-canceled {
+    background-color: #dc3545;
+    color: #fff;
+}

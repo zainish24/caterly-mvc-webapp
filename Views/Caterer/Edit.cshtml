@@ -1,0 +1,111 @@
+﻿@model WebApplication1.Models.CatererEditModel
+@{
+    Layout = "CatererLayout";
+}
+
+
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center">
+    <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
+        <div class="row">
+            <div class="col-lg-8">
+                <h1>Welcome to <span>Restaurantly</span></h1>
+                <h2>Delivering great food for more than 18 years!</h2>
+
+                <div class="btns">
+                    <a href="#contact" class="btn-menu animated fadeInUp scrollto">Edit Caterer Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- End Hero -->
+
+
+
+<main id="main">
+<section class="contact">
+    <div class="container text-gold">
+        <div class="section-title">
+            <h2>Edit Caterer</h2>
+            <p>Update the Caterer Details</p>
+        </div>
+
+        <form asp-action="Edit" method="post" enctype="multipart/form-data" class="php-email-form">
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-group">
+                <label asp-for="Name">Name</label>
+                <input asp-for="Name" class="form-control" placeholder="Enter caterer name" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email">Email</label>
+                <textarea asp-for="Email" class="form-control" placeholder="Enter email"></textarea>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Phone">Number of People</label>
+                <input asp-for="Phone" class="form-control" placeholder="Enter phone number" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Location">Location</label>
+                <input asp-for="Location" class="form-control" placeholder="Enter Location" />
+                <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description">Description</label>
+                <input asp-for="Description" class="form-control" placeholder="Enter About your catering" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CatererImage">Caterer Image</label>
+                <input asp-for="CatererImage" type="file" class="form-control" />
+                @if (!string.IsNullOrEmpty(ViewBag.ExistingCatererImage))
+                {
+                    <p>Current Image: <img src="@Url.Content("~/UploadImage/" + ViewBag.ExistingCatererImage)" alt="Current Caterer Image" style="max-width: 200px;" /></p>
+                }
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CategoryId">Category</label>
+                <select asp-for="CategoryId" class="form-control" id="categoryDropdown">
+                    <option value="">Select a category</option>
+                </select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+
+
+           
+
+            <div class="text-center mt-3">
+                <button type="submit" >Update</button>
+                <a asp-action="Index" asp-controller="Caterer" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</section>
+</main>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: '@Url.Action("GetCategories", "Caterer")',
+            type: "post",
+            success: function (data) {
+                var categoryDropdown = $("#categoryDropdown");
+                data.forEach(function (category) {
+                    categoryDropdown.append(`<option value="${category.cId}" ${category.cId == '@Model.CategoryId' ? 'selected' : ''}>${category.categoryName}</option>`);
+                });
+            },
+            error: function () {
+                console.error("Error fetching categories.");
+            }
+        });
+    });
+</script>

@@ -1,0 +1,64 @@
+﻿@model IEnumerable< WebApplication1.Models.Booking>
+
+@{
+    Layout = "CatererLayout";
+}
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center">
+    <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
+        <div class="row">
+            <div class="col-lg-8">
+                <h1>Welcome to <span>Restaurantly</span></h1>
+                <h2>Delivering great food for more than 18 years!</h2>
+
+                <div class="btns">
+                    <a href="#bookings" class="btn-menu animated fadeInUp scrollto">View Bookings</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- End Hero -->
+
+
+
+
+
+<main id="main">
+<section id="bookings" class="bookings">
+    <div class="container" data-aos="fade-up">
+        <div class="section-title">
+            <h2>Booking List</h2>
+            <p>Manage Existing Bookings</p>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-dark table-hover">
+                <thead class="bg-gold">
+                    <tr>
+                            <th style="text-align: left;">Customer Name</th>
+                            <th style="text-align: left;">Reservation Date</th>
+                            <th style="text-align: left;">Caterer</th>
+                            <th style="text-align: left;">Status</th>
+                            <th style="text-align: left;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var booking in Model)
+                    {
+                        <tr>
+                            <td>@booking.CustomerName</td>
+                            <td>@booking.ReservationDate.ToString("MMM dd, yyyy hh:mm tt")</td>
+                            <td>@booking.Caterer.Name</td>
+                            <td><span class="badge status-@booking.Status.ToLower()">@booking.Status</span></td>
+                            <td>
+                                <a href="@Url.Action("Details", "Booking", new { id = booking.Id })" class="btn btn-sm btn-outline-gold">
+                                    <i class="bi bi-eye"></i> Details
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+</main>
