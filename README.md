@@ -1,7 +1,7 @@
 # 🍽️ Caterly - ASP.NET MVC Catering Platform
 
 ![ASP.NET MVC](https://img.shields.io/badge/ASP.NET-MVC%20Web%20App-purple)
-![.NET Core](https://img.shields.io/badge/.NET-6.0-blue)
+![.NET Core](https://img.shields.io/badge/.NET-8.0-blue)
 ![SQL Server](https://img.shields.io/badge/Database-SQL%20Server-red)
 ![Web Application](https://img.shields.io/badge/Platform-Web%20App-green)
 
@@ -31,7 +31,7 @@ A complete **ASP.NET MVC Web Application** for online catering services with mul
 ## 🛠️ Built With
 
 - **Framework**: ASP.NET Core MVC
-- **Backend**: C# .NET 6
+- **Backend**: C# .NET 8
 - **Database**: SQL Server + Entity Framework Core
 - **Frontend**: Razor Views, Bootstrap, JavaScript
 - **Authentication**: ASP.NET Core Identity
@@ -39,7 +39,7 @@ A complete **ASP.NET MVC Web Application** for online catering services with mul
 ## 🚀 Quick Start
 
 ### Prerequisites
-- .NET 6.0 SDK
+- .NET 8.0 SDK
 - SQL Server
 - Visual Studio 2022
 
@@ -75,8 +75,8 @@ Caterly-MVC/
 1. **Update database connection** in `appsettings.json`:
 ```json
 {
-  "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost;Database=CaterlyDB;Trusted_Connection=true;"
+ "ConnectionStrings": {
+    "DefaultConnection": "Server=localhost;Database=your-database-here;Trusted_Connection=true;"
   }
 }
 ```
